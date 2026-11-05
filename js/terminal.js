@@ -3,24 +3,26 @@
 const TERMINAL_COMMANDS = {
   help: () => `
 Available commands:
-  <span class="text-cyan-400">about</span>          - Brief bio and current focus
+  <span class="text-cyan-400">about</span>          - Bio, leadership & role details
   <span class="text-cyan-400">skills</span>         - Core technologies and tools
   <span class="text-cyan-400">projects</span>       - Production projects & architectures
   <span class="text-cyan-400">experience</span>     - Industry roles & internships
   <span class="text-cyan-400">certs</span>          - Verified certifications & credentials
   <span class="text-cyan-400">socials</span>        - Links to LinkedIn, GitHub, Google Dev, etc.
   <span class="text-cyan-400">contact</span>        - Email, WhatsApp, and phone details
-  <span class="text-cyan-400">sudo hire</span>      - Special message for recruiters & founders
+  <span class="text-cyan-400">sudo hire</span>      - Direct channel for recruiters & founders
   <span class="text-cyan-400">clear</span>          - Clear terminal history
   <span class="text-cyan-400">time</span>           - Current Indian Standard Time (IST)
 `,
 
   about: () => `
 <span class="text-emerald-400 font-bold">Swadhin Ghosh</span>
-Role: Full-Stack Developer & Founder at Superx Corporation
+Role: <span class="text-white font-semibold">Founder & Software Development Engineer</span> at Superx Corporation
+Website: <a href="https://superxcorporation.in" target="_blank" class="text-cyan-300 underline">https://superxcorporation.in</a>
+Portfolio: <a href="https://swadhin-in.github.io" target="_blank" class="text-cyan-300 underline">https://swadhin-in.github.io</a>
 Education: BTech in Computer Science & Engineering (CEMK / MAKAUT, 2023-2028)
-Location: Purba Bardhaman, West Bengal, India
-Status: Available for Software Roles, High-Impact Internships & Collaborations.
+Location: Kolkata, WB, India
+Status: Available for Software Roles, High-Impact Engineering & Strategic Collaborations.
 `,
 
   skills: () => `
@@ -44,7 +46,7 @@ Type <span class="text-cyan-400">project &lt;name&gt;</span> or scroll to the Pr
 
   experience: () => `
 - <span class="text-indigo-400 font-bold">Eastern Coalfields Limited</span>: Software Developer Intern (Aug 2026 – Present)
-- <span class="text-indigo-400 font-bold">Superx Corporation Pvt Ltd</span>: Founder & Dev (Jan 2026 – Present)
+- <span class="text-indigo-400 font-bold">Superx Corporation Pvt Ltd</span>: Founder & Software Development Engineer (Jan 2026 – Present)
 - <span class="text-indigo-400 font-bold">Google</span>: Student Ambassador (Sep 2025 – Jul 2026)
 - <span class="text-indigo-400 font-bold">CodeAlpha</span>: Cyber Security Intern (Aug 2025 – Nov 2025)
 `,
@@ -65,30 +67,35 @@ GitHub:           <a href="https://github.com/swadhin-in" target="_blank" class=
 Google Developer: <a href="https://me.developers.google.com/u/Swadhin-india" target="_blank" class="text-cyan-300 underline">me.developers.google.com/u/Swadhin-india</a>
 Salesforce:       <a href="https://www.salesforce.com/trailblazer/swadhin-india" target="_blank" class="text-cyan-300 underline">salesforce.com/trailblazer/swadhin-india</a>
 Credly:           <a href="https://www.credly.com/users/swadhin.india" target="_blank" class="text-cyan-300 underline">credly.com/users/swadhin.india</a>
+Company:          <a href="https://superxcorporation.in" target="_blank" class="text-cyan-300 underline">superxcorporation.in</a>
 `,
 
   contact: () => `
-Email:    <a href="mailto:swadhin0031@gmail.com" class="text-cyan-300 underline">swadhin0031@gmail.com</a>
-Phone:    <a href="tel:+918327412357" class="text-cyan-300 underline">+91 83274 12357</a>
-WhatsApp: <a href="https://wa.me/918327412357" target="_blank" class="text-cyan-300 underline">Chat on WhatsApp</a>
-Location: Purba Bardhaman, WB, India (713128)
+Email:     <a href="mailto:swadhin0031@gmail.com" class="text-cyan-300 underline">swadhin0031@gmail.com</a>
+Work Tel:  <a href="tel:+918327412357" class="text-cyan-300 underline">+91 83274 12357</a>
+Home Tel:  <a href="tel:+918327412357" class="text-cyan-300 underline">+91 83274 12357</a>
+WhatsApp:  <a href="https://wa.me/918327412357" target="_blank" class="text-cyan-300 underline">Chat on WhatsApp</a>
+Company:   <a href="https://superxcorporation.in" target="_blank" class="text-cyan-300 underline">https://superxcorporation.in</a>
+Portfolio: <a href="https://swadhin-in.github.io" target="_blank" class="text-cyan-300 underline">https://swadhin-in.github.io</a>
+Address:   Kolkata, WB, India
 `,
 
   "sudo hire": () => `
 <span class="text-emerald-400 font-bold">Access Granted: [HIRING PROTOCOL ACTIVATED]</span>
 Thank you for your interest! Swadhin brings a rare blend of full-stack engineering,
-entrepreneurial drive (founder of Superx Corporation), AI integration, and cybersecurity acumen.
+entrepreneurial drive (Founder & SDE at Superx Corporation), AI integration, and cybersecurity acumen.
 Let's build something exceptional together!
 
 👉 Direct Email: <a href="mailto:swadhin0031@gmail.com?subject=Opportunity%20Discussion" class="text-cyan-300 underline">swadhin0031@gmail.com</a>
 👉 Direct Call/WhatsApp: <a href="https://wa.me/918327412357" target="_blank" class="text-cyan-300 underline">+91 83274 12357</a>
+👉 Company: <a href="https://superxcorporation.in" target="_blank" class="text-cyan-300 underline">https://superxcorporation.in</a>
 `,
 
   sudo: () => `<span class="text-rose-400">Permission denied: try 'sudo hire' 😉</span>`,
 
   time: () => {
     const ist = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-    return `<span class="text-amber-300">Current IST (India):</span> ${ist}`;
+    return `<span class="text-amber-300">Current IST (Kolkata, India):</span> ${ist}`;
   },
 
   whoami: () => `<span class="text-cyan-400">visitor@swadhin-portfolio</span>`

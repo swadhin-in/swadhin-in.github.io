@@ -103,7 +103,7 @@ function initTimeClock() {
       second: "2-digit"
     };
     const now = new Date().toLocaleTimeString("en-IN", options);
-    clockEl.textContent = `${now} IST (WB, India)`;
+    clockEl.textContent = `${now} IST (Kolkata, India)`;
   }
   update();
   setInterval(update, 1000);
@@ -240,29 +240,62 @@ function initCopyActions() {
   });
 }
 
-// Download vCard
+// Generate & Download vCard (.vcf)
+function generateVCardString() {
+  const photoB64 = (window.PROFILE_PHOTO_BASE64 || "").trim();
+
+  // Prepare folded lines for vCard 3.0 photo
+  const photoLines = [];
+  if (photoB64) {
+    const prefix = "PHOTO;ENCODING=BASE64;TYPE=JPEG:";
+    for (let i = 0; i < photoB64.length; i += 72) {
+      const chunk = photoB64.substring(i, Math.min(i + 72, photoB64.length));
+      if (i === 0) {
+        photoLines.push(prefix + chunk);
+      } else {
+        photoLines.push(" " + chunk);
+      }
+    }
+  }
+
+  const vCardLines = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "FN:Swadhin Ghosh",
+    "N:Ghosh;Swadhin;;;",
+    "TITLE:Founder & Software Development Engineer",
+    "ORG:Superx Corporation Pvt Ltd",
+    "EMAIL;TYPE=INTERNET,WORK:swadhin0031@gmail.com",
+    "TEL;TYPE=WORK,VOICE:+918327412357",
+    "TEL;TYPE=HOME,VOICE:+918327412357",
+    "URL;TYPE=WORK:https://superxcorporation.in",
+    "URL;TYPE=HOME:https://swadhin-in.github.io",
+    "item1.URL:https://swadhin-in.github.io",
+    "item1.X-ABLabel:Portfolio",
+    "X-PORTFOLIO:https://swadhin-in.github.io",
+    "ADR;TYPE=WORK:;;;Kolkata;WB;;India",
+    "ADR;TYPE=HOME:;;;Kolkata;WB;;India",
+    "LABEL;TYPE=WORK:Kolkata, WB, India",
+    "LABEL;TYPE=HOME:Kolkata, WB, India",
+    "X-SOCIALPROFILE;type=linkedin:https://linkedin.com/in/swadhin-ind",
+    "X-SOCIALPROFILE;type=github:https://github.com/swadhin-in",
+    "NOTE:Founder & Software Development Engineer | Superx Corporation | Google Student Ambassador"
+  ];
+
+  if (photoLines.length > 0) {
+    vCardLines.push(...photoLines);
+  }
+
+  vCardLines.push("END:VCARD");
+  return vCardLines.join("\r\n");
+}
+
 function initVCardDownload() {
-  const vcardBtn = document.getElementById("downloadVCardBtn");
-  if (!vcardBtn) return;
+  const vcardBtns = document.querySelectorAll(".download-vcard-action");
+  const mainBtn = document.getElementById("downloadVCardBtn");
 
-  vcardBtn.addEventListener("click", () => {
-    const vCardContent = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
-      "FN:Swadhin Ghosh",
-      "N:Ghosh;Swadhin;;;",
-      "TITLE:Full-Stack Developer & Founder",
-      "ORG:Superx Corporation Pvt Ltd",
-      "EMAIL;TYPE=INTERNET,WORK:swadhin0031@gmail.com",
-      "TEL;TYPE=CELL,VOICE,WHATSAPP:+918327412357",
-      "ADR;TYPE=WORK:;;Purba Bardhaman;West Bengal;713128;India",
-      "URL:https://swadhin-in.github.io",
-      "X-SOCIALPROFILE;type=linkedin:https://linkedin.com/in/swadhin-ind",
-      "X-SOCIALPROFILE;type=github:https://github.com/swadhin-in",
-      "NOTE:Full-Stack Developer | Google Student Ambassador | AI & Cybersecurity Enthusiast",
-      "END:VCARD"
-    ].join("\r\n");
-
+  function triggerDownload() {
+    const vCardContent = generateVCardString();
     const blob = new Blob([vCardContent], { type: "text/vcard;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -272,7 +305,18 @@ function initVCardDownload() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    showToast("Contact card (vCard) downloaded!");
+    showToast("Contact card (vCard) with photo downloaded!");
+  }
+
+  if (mainBtn) {
+    mainBtn.addEventListener("click", triggerDownload);
+  }
+
+  vcardBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      triggerDownload();
+    });
   });
 }
 
