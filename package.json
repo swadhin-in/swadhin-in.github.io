@@ -1,0 +1,23 @@
+{
+  "name": "swadhin-ghosh-portfolio",
+  "version": "1.0.0",
+  "description": "Unique, high-performance portfolio for Swadhin Ghosh - Full-Stack Developer & Founder",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 .",
+    "preview": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "portfolio",
+    "swadhin-ghosh",
+    "full-stack",
+    "software-engineer",
+    "react",
+    "node",
+    "tailwind",
+    "developer"
+  ],
+  "author": "Swadhin Ghosh <swadhin0031@gmail.com>",
+  "license": "MIT"
+}
